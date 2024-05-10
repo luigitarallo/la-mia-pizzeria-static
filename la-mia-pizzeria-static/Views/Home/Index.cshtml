@@ -1,6 +1,16 @@
 ﻿@{
     ViewData["Title"] = "La pizzeria di Giggino";
     Layout = null;
+
+    List<Pizza> pizzas = new List<Pizza>();
+    Pizza margherita = new Pizza("Margherita","Pomodoro, fiordilatte e basilico", "~/img/margherita.jpg", 5.5m);
+    pizzas.Add(margherita);
+    Pizza marinara = new Pizza("Marinara", "Pomodoro, origano ed aglio", "~/img/marinara.jpg", 4.5m);
+    pizzas.Add(marinara);
+    Pizza diavola = new Pizza("Diavola", "Pomodoro, fiordilatte e salame piccante", "~/img/diavola.jpg", 6m);
+    pizzas.Add(diavola);
+    Pizza carrettiera = new Pizza("Carrettiera", "Friarielli, fiordilatte e salsiccia", "~/img/salsiccia-friarielli.jpg", 6.5m);
+    pizzas.Add(carrettiera);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +24,56 @@
         <nav class="navbar bg-light">
             <div class="container-fluid">
                 <span class="navbar-brand text-danger">Pizzeria 'nda Giggino</span>
+                <span></span>
             </div>
         </nav>
     </header>
     <div class="container">
-        <h1>Ciao</h1>
+        <div class="row align-items-start">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrizione</th>
+                        <th scope="col">Prezzo</th>
+                        <th scope="col">Immagine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Pizza pizza in pizzas)
+                    {
+                    <tr>
+                        <td>@pizza.Name</td>
+                        <td>@pizza.Description</td>
+                        <td>@pizza.Price €</td>
+                        <td><img src="@Url.Content(pizza.Photo)" class="img-thumbnail w-25" alt="@pizza.Name"></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+  @*           @foreach (Pizza pizza in pizzas)
+            {
+            <div class="col">
+                <div class="card" style="width: 16rem;">
+                    <div class="img-fluid">
+                        <img src="@Url.Content(pizza.Photo)" class="card-img-top" alt="@pizza.Name">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@pizza.Name</h5>
+                        <p class="card-text">@pizza.Description</p>
+                        <span>Prezzo:€ @pizza.Price</span>
+                    </div>
+                </div>
+            </div>
+            } *@
+        </div>
+       
     </div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+
+<style>
+
+</style>
